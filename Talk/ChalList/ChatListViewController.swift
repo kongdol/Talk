@@ -39,6 +39,8 @@ class ChatListViewController: UIViewController {
         chatListCollectionView.collectionViewLayout = layout
         sortChatListDescending()
         
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .black
     }
     
 
@@ -48,10 +50,11 @@ class ChatListViewController: UIViewController {
 extension ChatListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        
         vc.chatIndex = indexPath.row
+    
         
-        present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     
@@ -70,6 +73,7 @@ extension ChatListViewController: UICollectionViewDataSource, UICollectionViewDe
         
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd HH:mm"
+        
         let a = ChatList.list[indexPath.item].chatList.last?.date
         
         if a != nil {

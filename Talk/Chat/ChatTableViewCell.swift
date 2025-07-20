@@ -22,8 +22,13 @@ class ChatTableViewCell: UITableViewCell {
         contentLabel.numberOfLines = 0
         chatContentView.layer.borderWidth = 1
         chatContentView.layer.borderColor = UIColor.gray.cgColor
-        chatContentView.layer.cornerRadius = 4
+        chatContentView.layer.cornerRadius = 8
         chatContentView.clipsToBounds = true
+        
+        dateLabel.font = UIFont.systemFont(ofSize: 11)
+        dateLabel.textColor = .gray
+        
+        
     }
 
    
