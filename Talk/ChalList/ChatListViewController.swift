@@ -46,6 +46,15 @@ class ChatListViewController: UIViewController {
 }
 
 extension ChatListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+        
+        vc.chatIndex = indexPath.row
+        
+        present(vc, animated: true)
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ChatList.list.count
     }
