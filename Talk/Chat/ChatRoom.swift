@@ -13,4 +13,14 @@ struct ChatRoom {
     let chatroomImage: String //채팅방 이미지
     let chatroomName: String //채팅방 이름
     var chatList: [Chat] = [] //채팅 화면에서 사용할 데이터
+    
+    // 연산프로퍼티
+    // 이렇게쓰는게 맞나 모르겠네요,,,
+    var lastTime: String? {
+        if chatList.last?.date != nil {
+            return chatList.last!.date
+        } else {
+            return ""
+        }
+    }
 }

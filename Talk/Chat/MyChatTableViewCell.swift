@@ -9,7 +9,7 @@ import UIKit
 
 class MyChatTableViewCell: UITableViewCell {
     
-   
+    
     @IBOutlet var myContentView: UIView!
     @IBOutlet var contentLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
@@ -17,10 +17,11 @@ class MyChatTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
-        
+        configureView()
+    }
+    
+    private func configureView() {
         contentLabel.numberOfLines = 0
-        
         myContentView.backgroundColor = .systemGray5
         myContentView.layer.borderWidth = 1
         myContentView.layer.borderColor = UIColor.gray.cgColor
@@ -30,5 +31,10 @@ class MyChatTableViewCell: UITableViewCell {
         dateLabel.font = UIFont.systemFont(ofSize: 11)
         dateLabel.textColor = .gray
     }
-
+    
+    func configureData(row: Chat) {
+        contentLabel.text = row.message
+        dateLabel.text = ChatDateFormat.chatDate(row)
+        
+    }
 }

@@ -8,8 +8,7 @@
 import UIKit
 
 class ChatTableViewCell: UITableViewCell {
-
- 
+    
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var contentLabel: UILabel!
@@ -19,6 +18,12 @@ class ChatTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
   
+        configureView()
+        
+        
+    }
+    
+    private func configureView() {
         contentLabel.numberOfLines = 0
         chatContentView.layer.borderWidth = 1
         chatContentView.layer.borderColor = UIColor.gray.cgColor
@@ -27,10 +32,17 @@ class ChatTableViewCell: UITableViewCell {
         
         dateLabel.font = UIFont.systemFont(ofSize: 11)
         dateLabel.textColor = .gray
-        
-        
     }
 
-   
-    
+    func configureData(chat: Chat) {
+        let img = chat.user.image
+        profileImage.image = UIImage(named: img)
+        nameLabel.text = chat.user.name
+        contentLabel.text = chat.message
+        
+        dateLabel.text = ChatDateFormat.chatDate(chat)
+    }
 }
+
+
+

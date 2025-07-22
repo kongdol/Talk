@@ -17,10 +17,27 @@ class ChatListCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
      
+        configureView()
+        
+        ChatDateFormat.sortChatList()
+        
+        //sortChatListDescending()
+    }
+    private func configureView() {
         image.layer.cornerRadius = 32
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFit
-        
     }
-
+    
+    // 채팅목록날짜구현
+    func configureData(row: ChatRoom) {
+        let imgName = row.chatroomImage
+        self.image.image = UIImage(named: imgName)
+        
+        nameLabel.text = row.chatroomName
+        chatLabel.text = row.chatList.last?.message
+        
+        // 채팅방날짜 25.07.13
+        dateLabel.text = ChatDateFormat.listLabel(row)
+    }
 }
