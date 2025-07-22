@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class ChatListViewController: UIViewController {
+class ChatListViewController: UIViewController, ColLayoutProtocol{
     
     let cell = "ChatListCollectionViewCell"
 
@@ -21,7 +21,7 @@ class ChatListViewController: UIViewController {
         let xib = UINib(nibName: cell, bundle: nil)
         chatListCollectionView.register(xib, forCellWithReuseIdentifier: cell)
         
-        layout(chatListCollectionView)
+        colLayout(chatListCollectionView)
        
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = .black
@@ -30,18 +30,20 @@ class ChatListViewController: UIViewController {
         chatListCollectionView.delegate = self
         chatListCollectionView.dataSource = self
     }
+    
+    func colLayout(_ collectionView: UICollectionView) {
+        let layout = UICollectionViewFlowLayout()
+        print(collectionView.frame.width)
+        layout.itemSize = CGSize(width: collectionView.frame.width, height: 64)
+        layout.sectionInset = UIEdgeInsets(top: 16, left: 4, bottom: 16, right: 4)
+        layout.minimumLineSpacing = 16
+        layout.scrollDirection = .vertical
+        
+        collectionView.collectionViewLayout = layout
+    }
 }
 
-private func layout(_ collectionView: UICollectionView) {
-    let layout = UICollectionViewFlowLayout()
-    print(collectionView.frame.width)
-    layout.itemSize = CGSize(width: collectionView.frame.width, height: 64)
-    layout.sectionInset = UIEdgeInsets(top: 16, left: 4, bottom: 16, right: 4)
-    layout.minimumLineSpacing = 16
-    layout.scrollDirection = .vertical
-    
-    collectionView.collectionViewLayout = layout
-}
+
 
 extension ChatListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatListCollectionViewCell: UICollectionViewCell {
+class ChatListCollectionViewCell: UICollectionViewCell, ViewProtocol{
     
     @IBOutlet var image: UIImageView!
     @IBOutlet var nameLabel: UILabel!
@@ -20,10 +20,8 @@ class ChatListCollectionViewCell: UICollectionViewCell {
         configureView()
         
         ChatDateFormat.sortChatList()
-        
-        //sortChatListDescending()
     }
-    private func configureView() {
+    func configureView() {
         image.layer.cornerRadius = 32
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFit

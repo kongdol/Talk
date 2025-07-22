@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ChatTableViewCell: UITableViewCell {
-    
+class ChatTableViewCell: UITableViewCell, ViewProtocol {
+ 
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var contentLabel: UILabel!
@@ -19,21 +19,15 @@ class ChatTableViewCell: UITableViewCell {
         super.awakeFromNib()
   
         configureView()
-        
-        
     }
     
-    private func configureView() {
+    func configureView() {
         contentLabel.numberOfLines = 0
         
-        // 변수이름 같은거 포문?
-        chatContentView.layer.borderWidth = 1
-        chatContentView.layer.borderColor = UIColor.gray.cgColor
-        chatContentView.layer.cornerRadius = 8
-        chatContentView.clipsToBounds = true
+        dateLabel.bubbleDate()
         
-        dateLabel.font = UIFont.systemFont(ofSize: 11)
-        dateLabel.textColor = .gray
+        
+        chatContentView.otherBubbleView()
     }
 
     func configureData(chat: Chat) {

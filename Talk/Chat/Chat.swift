@@ -12,3 +12,5 @@ struct Chat {
     let date: String
     let message: String
 }
+
+

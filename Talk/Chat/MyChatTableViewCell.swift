@@ -23,19 +23,13 @@ class MyChatTableViewCell: UITableViewCell {
     //MARK: 변수이름같은거 포문?
     private func configureView() {
         contentLabel.numberOfLines = 0
-        myContentView.backgroundColor = .systemGray5
-        myContentView.layer.borderWidth = 1
-        myContentView.layer.borderColor = UIColor.gray.cgColor
-        myContentView.layer.cornerRadius = 8
-        myContentView.clipsToBounds = true
-        
-        dateLabel.font = UIFont.systemFont(ofSize: 11)
-        dateLabel.textColor = .gray
+        myContentView.myBubbleView()
+        dateLabel.bubbleDate()
     }
     
     func configureData(row: Chat) {
         contentLabel.text = row.message
         dateLabel.text = ChatDateFormat.chatDate(row)
-        
     }
 }
+

@@ -7,6 +7,39 @@
 
 import UIKit
 
+enum CellType: String {
+    case other = "ChatTableViewCell"
+    case me = "MyChatTableViewCell"
+    
+    // 연산프로퍼티
+    var nib: UINib {
+        return UINib(nibName: self.rawValue, bundle: nil)
+    }
+    
+    var identifier: String {
+        return self.rawValue
+    }
+    
+    func register(_ tableView: UITableView) {
+        tableView.register(nib, forCellReuseIdentifier: identifier)
+    }
+    
+    func dequeue (_ tableView: UITableView, indexPath: IndexPath, chat: Chat) -> UITableViewCell {
+        switch self {
+        case .other:
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ChatTableViewCell
+            cell.configureData(chat: chat)
+            return cell
+        case .me:
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MyChatTableViewCell
+            cell.configureData(row: chat)
+            return cell
+        }
+
+        
+    }
+}
+
 class ChatViewController: UIViewController {
     
     @IBOutlet var chatTableView: UITableView!
@@ -15,14 +48,10 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // MARK: - 이름에 따라 나눠보기?
-        let xib = UINib(nibName: "ChatTableViewCell", bundle: nil)
-        chatTableView.register(xib, forCellReuseIdentifier: "ChatTableViewCell")
-        
-        let myxib = UINib(nibName: "MyChatTableViewCell", bundle: nil)
-        chatTableView.register(myxib, forCellReuseIdentifier: "MyChatTableViewCell")
-        
+    
+        CellType.other.register(chatTableView)
+        CellType.me.register(chatTableView)
+    
         navigationItem.title = ChatList.list[chatIndex].chatroomName
         
         chatTableView.delegate = self
@@ -41,15 +70,11 @@ extension ChatViewController: UITableViewDelegate,UITableViewDataSource {
         let chat = chatRoom.chatList[indexPath.row]
         
         if chat.user.name == "김새싹" {
-            let cell = chatTableView.dequeueReusableCell(withIdentifier: "MyChatTableViewCell", for: indexPath) as! MyChatTableViewCell
-            
-            cell.configureData(row: chat)
-
+            let cell = CellType.me.dequeue(chatTableView, indexPath: indexPath, chat: chat)
+    
             return cell
         } else {
-            let cell = chatTableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell", for: indexPath) as! ChatTableViewCell
-            
-            cell.configureData(chat: chat)
+            let cell = CellType.other.dequeue(chatTableView, indexPath: indexPath, chat: chat)
             
             return cell
         }
