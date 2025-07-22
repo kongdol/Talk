@@ -16,6 +16,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: - 이름에 따라 나눠보기?
         let xib = UINib(nibName: "ChatTableViewCell", bundle: nil)
         chatTableView.register(xib, forCellReuseIdentifier: "ChatTableViewCell")
         
@@ -43,7 +44,7 @@ extension ChatViewController: UITableViewDelegate,UITableViewDataSource {
             let cell = chatTableView.dequeueReusableCell(withIdentifier: "MyChatTableViewCell", for: indexPath) as! MyChatTableViewCell
             
             cell.configureData(row: chat)
-            
+
             return cell
         } else {
             let cell = chatTableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell", for: indexPath) as! ChatTableViewCell

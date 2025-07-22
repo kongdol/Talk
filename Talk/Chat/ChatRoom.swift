@@ -23,4 +23,12 @@ struct ChatRoom {
             return ""
         }
     }
+    
+    var lastMessage: String? {
+        if chatList.last?.date != nil {
+            return chatList.last!.message
+        } else {
+            return ""
+        }
+    }
 }
