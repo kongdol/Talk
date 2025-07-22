@@ -20,6 +20,7 @@ class MyChatTableViewCell: UITableViewCell {
         configureView()
     }
     
+    //MARK: 변수이름같은거 포문?
     private func configureView() {
         contentLabel.numberOfLines = 0
         myContentView.backgroundColor = .systemGray5

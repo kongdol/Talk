@@ -35,7 +35,7 @@ class ChatListCollectionViewCell: UICollectionViewCell {
         self.image.image = UIImage(named: imgName)
         
         nameLabel.text = row.chatroomName
-        chatLabel.text = row.chatList.last?.message
+        chatLabel.text = row.lastMessage
         
         // 채팅방날짜 25.07.13
         dateLabel.text = ChatDateFormat.listLabel(row)

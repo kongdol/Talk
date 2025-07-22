@@ -13,6 +13,7 @@ struct ChatDateFormat {
         format.dateFormat = "yyyy-MM-dd HH:mm"
         return format
     }
+    
     // 채팅목록날짜
     static func listLabel(_ row: ChatRoom) -> String {
         if let lastTime = row.lastTime {
@@ -20,6 +21,7 @@ struct ChatDateFormat {
                 print("dateResult가 없어요")
                 return ""
             }
+            
             let outputFormatter = DateFormatter()
             outputFormatter.dateFormat = "yy.MM.dd"
             let outputString = outputFormatter.string(from: dateResult)
@@ -28,6 +30,7 @@ struct ChatDateFormat {
         print("lastTime이 없어요")
         return ""
     }
+    
     
     // 채팅방 날짜 (나, 상대)
     static func chatDate(_ row: Chat) -> String {
@@ -48,8 +51,8 @@ struct ChatDateFormat {
         
         for i in 0 ..< count {
             for j in i+1 ..< count {
-                let firstDateString = ChatList.list[i].chatList.last?.date
-                let secondDateString = ChatList.list[j].chatList.last?.date
+                let firstDateString = ChatList.list[i].lastTime
+                let secondDateString = ChatList.list[j].lastTime
                 
                 if let firstDate = ChatDateFormat.inputFormat.date(from: firstDateString!),
                    let secondDate = ChatDateFormat.inputFormat.date(from: secondDateString!) {
@@ -60,14 +63,7 @@ struct ChatDateFormat {
                         ChatList.list[j] = temp
                     }
                 }
-                   
             }
         }
-        
     }
-  
-    
-    
-    
-    
 }

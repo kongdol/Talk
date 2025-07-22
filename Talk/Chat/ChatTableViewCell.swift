@@ -25,6 +25,8 @@ class ChatTableViewCell: UITableViewCell {
     
     private func configureView() {
         contentLabel.numberOfLines = 0
+        
+        // 변수이름 같은거 포문?
         chatContentView.layer.borderWidth = 1
         chatContentView.layer.borderColor = UIColor.gray.cgColor
         chatContentView.layer.cornerRadius = 8
